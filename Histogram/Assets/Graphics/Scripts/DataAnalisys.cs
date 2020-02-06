@@ -8,20 +8,7 @@ public class DataAnalisys : MonoBehaviour
     public Transform father;
     public GameObject intervalTxt;
     public static Material material;
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Debug.Log(10 / 3);
-        //float[] someArray = new float[] {1, 2, 2, 3, 4, 4, 4, 4, 6, 6, 7, 8,8,8,8,8,8,8,8,8,9,9, 9, 10, 11, 0, 12 };
-        //string[] stringArray = new string[7] { "hi", "hello", "gold", "hi", "Russia", "hello", "HI" };
-        //hist(someArray, 11, cube, father);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public static float[] SetTop3Value(float[] data)
     {
         /*
@@ -90,16 +77,15 @@ public class DataAnalisys : MonoBehaviour
         float[] res = new float[] { el1, el1Count, el2, el2Count, el3, el3Count };
         return res;
         }
-
     public static float[,] SetTop3Count(float[] data)
     {
         /*
          * Функция принимает массив значений и находит 3 наиболее встречающихся
-         * Вовращает двумерный массив, где в первом 
+         * Вовращает двумерный массив, где в 0 
          * 0 - количество повторений наиболее часто встречающегося элемента
          * 1 - количество повторений второго по частоте элемента
          * 2 - количество повторений третьего по частоте элемента
-         * Во втором:
+         * В 1:
          * 0 - первый элемент
          * 1 - второй элемент
          * 3 - третий элемент
@@ -200,6 +186,19 @@ public class DataAnalisys : MonoBehaviour
         return res;
     }
 
+    public static float countInInterval(float[] data, float min, float max)
+    {
+        float k = 0;
+        foreach (float el in data)
+        {
+            if(el > min && el <= max)
+            {
+                k++;
+            }
+        }
+        return k;
+    }
+
     private static float[,] MathHist(float[] data, int bins)
     {
         // Разбивает массив на bins интервалов по значению.
@@ -214,13 +213,13 @@ public class DataAnalisys : MonoBehaviour
         float[,] intervals = new float[bins, 2];
 
         float thisValue = 0;
-        for(int i = 0; i < bins; i++)
+        for (int i = 0; i < bins; i++)
         {
             intervals[i, 0] = thisValue;
             thisValue += step;
             intervals[i, 1] = thisValue;
         }
-        intervals[bins-1, 1] = max;
+        intervals[bins - 1, 1] = max;
         return intervals;
     }
     public static void hist(float[] data, int bins, GameObject cube, Transform father, GameObject intervalTxt, GradientsTheme.Gradient gradient, byte alpha)
@@ -229,16 +228,19 @@ public class DataAnalisys : MonoBehaviour
         Color32[] colors = GradientsTheme.SetGradient(gradient, bins, alpha);
         float[,] intervals = MathHist(data, bins);
         float width = 10 / bins;
-        for(int i = 0; i < bins; i++)
+        float k = 10f; // Высота максимального значения
+        float kf = k / SetTop3Count(data)[0, 0];
+        
+        for (int i = 0; i < bins; i++)
         {
-            
+
             if (i == 0)
             {
                 GameObject obj = Instantiate(cube);
+                obj.transform.SetParent(father);
                 obj.GetComponent<MeshRenderer>().material.color = colors[i];
                 GameObject txtObj = Instantiate(intervalTxt);
-                obj.transform.SetParent(father);
-                obj.transform.transform.localScale = new Vector3((10.0f / bins), countInInterval(data, intervals[i, 0] - 1f, intervals[i, 1]), 10.0f / bins);
+                obj.transform.transform.localScale = new Vector3((10.0f / bins), countInInterval(data, intervals[i, 0] - 1f, intervals[i, 1]) * kf, 10.0f / bins);
                 obj.transform.position = new Vector3(-5.0f + (obj.transform.localScale.x / 2.0f) + i * (obj.transform.localScale.x), obj.transform.localScale.y / 2.0f, obj.transform.position.z);
                 string text = "" + intervals[i, 0];
                 txtObj.GetComponent<TextMesh>().text = text;
@@ -247,22 +249,22 @@ public class DataAnalisys : MonoBehaviour
             else if (i == bins - 1)
             {
                 GameObject obj = Instantiate(cube);
+                obj.transform.SetParent(father);
                 obj.GetComponent<MeshRenderer>().material.color = colors[i];
                 GameObject txtObj = Instantiate(intervalTxt);
-                obj.transform.SetParent(father);
-                obj.transform.transform.localScale = new Vector3((10.0f / bins), countInInterval(data, intervals[i, 0], intervals[i, 1] + 1), 10.0f / bins);
-                obj.transform.position = new Vector3(-5.0f + (obj.transform.localScale.x / 2.0f) + i * (obj.transform.localScale.x), obj.transform.localScale.y / 2.0f, obj.transform.position.z);
-                string text = ""+(intervals[i, 1] - 1);
+                obj.transform.transform.localScale = new Vector3((10.0f / bins), countInInterval(data, intervals[i, 0], intervals[i, 1] + 1) * kf, 10.0f / bins);
+                obj.transform.position = new Vector3(-5.0f + (obj.transform.localScale.x / 2.0f) + i * (obj.transform.localScale.x) + (father.transform.position.x - 0), obj.transform.localScale.y / 2.0f, obj.transform.position.z);
+                string text = "" + (intervals[i, 1] - 1);
                 txtObj.GetComponent<TextMesh>().text = text;
                 txtObj.transform.position = obj.transform.position;
             }
             else
             {
                 GameObject obj = Instantiate(cube);
+                obj.transform.SetParent(father);
                 obj.GetComponent<MeshRenderer>().material.color = colors[i];
                 //GameObject txtObj = Instantiate(intervalTxt);
-                obj.transform.SetParent(father);
-                obj.transform.transform.localScale = new Vector3((10.0f / bins), countInInterval(data, intervals[i, 0], intervals[i, 1]), 10.0f / bins);
+                obj.transform.transform.localScale = new Vector3((10.0f / bins), countInInterval(data, intervals[i, 0], intervals[i, 1]) * kf, 10.0f / bins);
                 obj.transform.position = new Vector3(-5.0f + (obj.transform.localScale.x / 2.0f) + i * (obj.transform.localScale.x), obj.transform.localScale.y / 2.0f, obj.transform.position.z);
                 string text = intervals[i, 0] + "-" + intervals[i, 1];
                 //txtObj.GetComponent<TextMesh>().text = text;
@@ -270,19 +272,18 @@ public class DataAnalisys : MonoBehaviour
             }
         }
     }
-    public static float countInInterval(float[] data, float min, float max)
-    {
-        float k = 0;
-        foreach (float el in data)
-        {
-            if(el > min && el <= max)
-            {
-                k++;
-            }
-        }
-        return k;
-    }
 
+    public static void Scatter(float[] x, float[] y, GameObject dot)
+    {
+        // На вход принимает два равных массива
+        GameObject obj = Instantiate(dot);
+        float xLen = MinMaxFromArray(x)[1] - MinMaxFromArray(x)[0];
+        float yLen = MinMaxFromArray(y)[1] - MinMaxFromArray(y)[1];
+    }
+    public static void Scatter(float[] x, float[] y, int[] kinds)
+    {
+        // На вход принимает два равных массива и номер класса для каждого из обьектов.
+    }
 
 
 }

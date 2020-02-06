@@ -6,7 +6,7 @@ public class GradientsTheme : MonoBehaviour
 {
     public enum Gradient {
         //Clasick
-        Portrait, MetalicToad, Lizard, ForeverLost, 
+        Portrait, MetalicToad, Lizard, ForeverLost, Mirage,
         //Blue group
         DeepSeaSpace, TelegramLike, CocoaaIce, Disco, BackToEarthBiomax, BetweenDayAndNightBioRythms, EndlessRiver,
         //Red group
@@ -41,7 +41,7 @@ public class GradientsTheme : MonoBehaviour
             Vector3Int start = new Vector3Int(142, 158, 171);
             Vector3Int end = new Vector3Int(238, 242, 243);
             return SetMyGradient(start, end, bins, alpha);
-        }        
+        }
         else if (gradient == Gradient.MetalicToad)
         {
             Vector3Int start = new Vector3Int(171, 186, 171);
@@ -56,8 +56,14 @@ public class GradientsTheme : MonoBehaviour
         }
         else if (gradient == Gradient.ForeverLost)
         {
-            Vector3Int start = new Vector3Int(93, 65, 87);
-            Vector3Int end = new Vector3Int(168, 202, 186);
+            Vector3Int start = new Vector3Int(93, 65, 42);
+            Vector3Int end = new Vector3Int(58, 96, 115);
+            return SetMyGradient(start, end, bins, alpha);
+        }
+        else if (gradient == Gradient.Mirage)
+        {
+            Vector3Int start = new Vector3Int(22, 34, 42);
+            Vector3Int end = new Vector3Int(58, 96, 115);
             return SetMyGradient(start, end, bins, alpha);
         }
         //Blue Theme
@@ -88,7 +94,7 @@ public class GradientsTheme : MonoBehaviour
         else if (gradient == Gradient.BackToEarthBiomax)
         {
             Vector3Int start = new Vector3Int(0, 201, 255);
-            Vector3Int end = new Vector3Int(146, 254, 157 );
+            Vector3Int end = new Vector3Int(146, 254, 157);
             return SetMyGradient(start, end, bins, alpha);
         }//BIOMax
         else if (gradient == Gradient.BetweenDayAndNightBioRythms)
@@ -150,7 +156,7 @@ public class GradientsTheme : MonoBehaviour
         }
         else if (gradient == Gradient.CrazyOrangeI)
         {
-            
+
         }
         else if (gradient == Gradient.FreshTurboscent)
         {
@@ -173,7 +179,7 @@ public class GradientsTheme : MonoBehaviour
         else if (gradient == Gradient.TurquioiseFlow)
         {
             Vector3Int start = new Vector3Int(19, 106, 138);
-            Vector3Int end = new Vector3Int(38 , 120, 113);
+            Vector3Int end = new Vector3Int(38, 120, 113);
             return SetMyGradient(start, end, bins, alpha);
         }
         else if (gradient == Gradient.PastelOrangeAtTheSun)
