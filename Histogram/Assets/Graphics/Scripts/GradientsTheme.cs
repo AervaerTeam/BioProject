@@ -254,4 +254,31 @@ public class GradientsTheme : MonoBehaviour
         }
         return colors;
     }
+
+    public static Color32[] colorThemeDiscret(int typesCount)
+    {
+        Color32 color1 = new Color32(0, 0, 139, 255);
+        Color32 color2 = new Color32(139, 0, 0, 255);
+        Color32 color3 = new Color32(0, 139, 0, 255);
+        if (typesCount == 1)
+        {
+            Color32[] res = new Color32[] { color1 };
+            return res;
+        }
+        else if (typesCount == 2)
+        {
+            Color32[] res = new Color32[] { color1, color2 };
+            return res;
+        }
+        else if (typesCount == 3)
+        {
+            Color32[] res = new Color32[] { color1, color2, color3 };
+            return res;
+        }
+        else
+        {
+            return new Color32[]{new Color32(0, 0, 0, 0)};
+        }
+        return new Color32[] { new Color32(0, 0, 0, 0) };
+    }
 }

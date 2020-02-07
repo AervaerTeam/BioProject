@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -128,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &229870378
 Light:
   m_ObjectHideFlags: 0
@@ -595,6 +595,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 827353700}
     m_Modifications:
+    - target: {fileID: 3949996705723180503, guid: 96d9436f9d5469743a66c5adc0ec7246,
+        type: 3}
+      propertyPath: m_Name
+      value: Sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949996705723180503, guid: 96d9436f9d5469743a66c5adc0ec7246,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3949996705723180499, guid: 96d9436f9d5469743a66c5adc0ec7246,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -648,16 +658,6 @@ PrefabInstance:
     - target: {fileID: 3949996705723180499, guid: 96d9436f9d5469743a66c5adc0ec7246,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3949996705723180503, guid: 96d9436f9d5469743a66c5adc0ec7246,
-        type: 3}
-      propertyPath: m_Name
-      value: Sphere
-      objectReference: {fileID: 0}
-    - target: {fileID: 3949996705723180503, guid: 96d9436f9d5469743a66c5adc0ec7246,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

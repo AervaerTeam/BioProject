@@ -182,6 +182,28 @@ public class DataAnalisys : MonoBehaviour
         float[] res = new float[] { min, max };
         return res;
     }
+    public static float[] MinMaxFromArray(int[] data)
+    {
+        // Возвращает минимальное и максимальное значение массива.
+
+        float min = data[0];
+        float max = data[0];
+
+        foreach (float el in data)
+        {
+            if (el > max)
+            {
+                max = el;
+            }
+            else if (el < min)
+            {
+                min = el;
+            }
+        }
+        max++;
+        float[] res = new float[] { min, max };
+        return res;
+    }
 
     public static float countInInterval(float[] data, float min, float max)
     {
@@ -290,21 +312,27 @@ public class DataAnalisys : MonoBehaviour
     public static void Scatter(float[] x, float[] y, int[] type, GameObject dot, GameObject father)
     {
         // На вход принимает два равных массива
-
+        //float k = MinMaxFromArray(type)[1];
+        int c = int.Parse(3.ToString());
+        Color32[] colors = GradientsTheme.colorThemeDiscret(c);
+        
         float xLen = MinMaxFromArray(x)[1] - MinMaxFromArray(x)[0];
         float yLen = MinMaxFromArray(y)[1] - MinMaxFromArray(y)[0];
         float kfX = 10 / xLen;
         float kfY = 10 / yLen;
-        Color32[] colors = GradientsTheme.SetMyGradient(new Color32(0,0,0,255), new Color32(255,255,255,255), type.Length, 255);
-        for (int i = 0; i < x.Length; i++)
+        //Color32[] colors = GradientsTheme.SetMyGradient(new Color32(0,0,0,255), new Color32(255,255,255,255), type.Length, 255);
+        for (int i = 0; i < type.Length; i++)
         {
+
             GameObject obj = Instantiate(dot);
+            obj.GetComponent<MeshRenderer>().material.color = colors[type[i] - 1];
             obj.transform.parent = father.transform;
             obj.transform.localPosition = new Vector3(x[i] * kfX - 5, obj.transform.position.y, y[i] * kfY - 5);
 
-            obj.GetComponent<MeshRenderer>().material.color = colors[type[i]];
+            //Debug.Log(type[i]);
+            //Debug.Log(colors[i].r + colors[i].g + colors[i].b);
+            //obj.GetComponent<MeshRenderer>().material.color = colors[type[i]];
         }
     }
 }
-
 
