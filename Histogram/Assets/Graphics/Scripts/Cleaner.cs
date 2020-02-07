@@ -20,7 +20,7 @@ public class Cleaner : MonoBehaviour
 
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Player"))
             {
-                if (obj.transform.position.y < 0.2f)
+                if (obj.transform.localPosition.y < 0.2f)
                 {
                     Destroy(obj);
                     Debug.Log("Обьект уничтожен, тк высота < 0.2f");

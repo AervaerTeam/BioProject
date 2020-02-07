@@ -243,6 +243,7 @@ public class DataAnalisys : MonoBehaviour
     }
     public static void hist(float[] data, int bins, GameObject cube, Transform father, GameObject intervalTxt, GradientsTheme.Gradient gradient, byte alpha)
     {
+       
         // Рисует гистограму 3д с привязкой к родителю.
         Color32[] colors = GradientsTheme.SetGradient(gradient, bins, alpha);
         float[,] intervals = MathHist(data, bins);
@@ -260,7 +261,8 @@ public class DataAnalisys : MonoBehaviour
                 obj.GetComponent<MeshRenderer>().material.color = colors[i];
                 GameObject txtObj = Instantiate(intervalTxt);
                 obj.transform.transform.localScale = new Vector3((10.0f / bins), countInInterval(data, intervals[i, 0] - 1f, intervals[i, 1]) * kf, 10.0f / bins);
-                obj.transform.position = new Vector3(-5.0f + (obj.transform.localScale.x / 2.0f) + i * (obj.transform.localScale.x), obj.transform.localScale.y / 2.0f, obj.transform.position.z);
+                obj.transform.localPosition = new Vector3(-5.0f + (obj.transform.localScale.x / 2.0f) + i * (obj.transform.localScale.x), obj.transform.localScale.y / 2.0f, obj.transform.position.z);
+                obj.transform.localRotation = new Quaternion(0,0,0,0);
                 string text = "" + intervals[i, 0];
                 txtObj.GetComponent<TextMesh>().text = text;
                 txtObj.transform.position = obj.transform.position;
@@ -272,7 +274,8 @@ public class DataAnalisys : MonoBehaviour
                 obj.GetComponent<MeshRenderer>().material.color = colors[i];
                 GameObject txtObj = Instantiate(intervalTxt);
                 obj.transform.transform.localScale = new Vector3((10.0f / bins), countInInterval(data, intervals[i, 0], intervals[i, 1] + 1) * kf, 10.0f / bins);
-                obj.transform.position = new Vector3(-5.0f + (obj.transform.localScale.x / 2.0f) + i * (obj.transform.localScale.x) + (father.transform.position.x - 0), obj.transform.localScale.y / 2.0f, obj.transform.position.z);
+                obj.transform.localPosition = new Vector3(-5.0f + (obj.transform.localScale.x / 2.0f) + i * (obj.transform.localScale.x), obj.transform.localScale.y / 2.0f, obj.transform.position.z);
+                obj.transform.localRotation = new Quaternion(0, 0, 0, 0);
                 string text = "" + (intervals[i, 1] - 1);
                 txtObj.GetComponent<TextMesh>().text = text;
                 txtObj.transform.position = obj.transform.position;
@@ -284,7 +287,8 @@ public class DataAnalisys : MonoBehaviour
                 obj.GetComponent<MeshRenderer>().material.color = colors[i];
                 //GameObject txtObj = Instantiate(intervalTxt);
                 obj.transform.transform.localScale = new Vector3((10.0f / bins), countInInterval(data, intervals[i, 0], intervals[i, 1]) * kf, 10.0f / bins);
-                obj.transform.position = new Vector3(-5.0f + (obj.transform.localScale.x / 2.0f) + i * (obj.transform.localScale.x), obj.transform.localScale.y / 2.0f, obj.transform.position.z);
+                obj.transform.localPosition = new Vector3(-5.0f + (obj.transform.localScale.x / 2.0f) + i * (obj.transform.localScale.x), obj.transform.localScale.y / 2.0f, obj.transform.position.z);
+                obj.transform.localRotation = new Quaternion(0, 0, 0, 0);
                 string text = intervals[i, 0] + "-" + intervals[i, 1];
                 //txtObj.GetComponent<TextMesh>().text = text;
                 //txtObj.transform.position = obj.transform.position;
