@@ -232,4 +232,26 @@ public class GradientsTheme : MonoBehaviour
         }
         return colors;
     }
+    public static Color32[] SetMyGradient(Color32 startColor, Color32 endColor, int bins, byte alpha)
+    {
+        Color32[] colors = new Color32[bins];
+
+        Vector3Int start = new Vector3Int(startColor.r, startColor.g, startColor.b);
+        Vector3Int end = new Vector3Int(endColor.r, endColor.g, endColor.b);
+        int stepX = (end.x - start.x) / bins;
+        int stepY = (end.y - start.y) / bins;
+        int stepZ = (end.z - start.z) / bins;
+
+        Vector3Int step = new Vector3Int(stepX, stepY, stepZ);
+        Vector3Int thisVector = start;
+        for (int i = 0; i < bins; i++)
+        {
+            byte x = byte.Parse(thisVector.x.ToString());
+            byte y = byte.Parse(thisVector.y.ToString());
+            byte z = byte.Parse(thisVector.z.ToString());
+            colors[i] = new Color32(x, y, z, alpha);
+            thisVector += step;
+        }
+        return colors;
+    }
 }

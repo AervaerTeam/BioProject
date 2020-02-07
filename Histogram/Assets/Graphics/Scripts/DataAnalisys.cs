@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class DataAnalisys : MonoBehaviour
 {
-    public GameObject cube;
-    public Transform father;
-    public GameObject intervalTxt;
-    public static Material material;
+    
 
     public static float[] SetTop3Value(float[] data)
     {
@@ -228,7 +225,7 @@ public class DataAnalisys : MonoBehaviour
         Color32[] colors = GradientsTheme.SetGradient(gradient, bins, alpha);
         float[,] intervals = MathHist(data, bins);
         float width = 10 / bins;
-        float k = 10f; // Высота максимального значения
+        float k = 5.625f; // Высота максимального значения
         float kf = k / SetTop3Count(data)[0, 0];
         
         for (int i = 0; i < bins; i++)
@@ -273,19 +270,41 @@ public class DataAnalisys : MonoBehaviour
         }
     }
 
-    public static void Scatter(float[] x, float[] y, GameObject dot)
+    public static void Scatter(float[] x, float[] y, GameObject dot, GameObject father)
     {
         // На вход принимает два равных массива
-        GameObject obj = Instantiate(dot);
+        
+        
         float xLen = MinMaxFromArray(x)[1] - MinMaxFromArray(x)[0];
-        float yLen = MinMaxFromArray(y)[1] - MinMaxFromArray(y)[1];
+        float yLen = MinMaxFromArray(y)[1] - MinMaxFromArray(y)[0];
+        float kfX = 10 / xLen;
+        float kfY = 10 / yLen;
+        for (int i = 0; i < x.Length; i++)
+        {
+            Debug.Log(i);
+            GameObject obj = Instantiate(dot);
+            obj.transform.parent = father.transform;
+            obj.transform.localPosition = new Vector3(x[i] * kfX - 5, obj.transform.position.y,y[i] * kfY - 5);
+        }
     }
-    public static void Scatter(float[] x, float[] y, int[] kinds)
+    public static void Scatter(float[] x, float[] y, int[] type, GameObject dot, GameObject father)
     {
-        // На вход принимает два равных массива и номер класса для каждого из обьектов.
+        // На вход принимает два равных массива
+
+        float xLen = MinMaxFromArray(x)[1] - MinMaxFromArray(x)[0];
+        float yLen = MinMaxFromArray(y)[1] - MinMaxFromArray(y)[0];
+        float kfX = 10 / xLen;
+        float kfY = 10 / yLen;
+        Color32[] colors = GradientsTheme.SetMyGradient(new Color32(0,0,0,255), new Color32(255,255,255,255), type.Length, 255);
+        for (int i = 0; i < x.Length; i++)
+        {
+            GameObject obj = Instantiate(dot);
+            obj.transform.parent = father.transform;
+            obj.transform.localPosition = new Vector3(x[i] * kfX - 5, obj.transform.position.y, y[i] * kfY - 5);
+
+            obj.GetComponent<MeshRenderer>().material.color = colors[type[i]];
+        }
     }
-
-
 }
 
 
