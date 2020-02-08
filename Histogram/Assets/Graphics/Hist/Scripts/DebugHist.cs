@@ -20,7 +20,7 @@ public class DebugHist : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DataAnalisys.hist(data, bins, cube, parent, txt, colorTheme, alpha: 200);
+        DataAnalisys.hist(data, bins, cube, parent, colorTheme, 200);
     }
 
     // Update is called once per frame

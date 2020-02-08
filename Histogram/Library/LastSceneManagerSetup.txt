@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Frontend/Scenes/AddTarget.unity
+- path: Assets/Frontend/Scenes/CreateDataBase.unity
   isLoaded: 1
   isActive: 1

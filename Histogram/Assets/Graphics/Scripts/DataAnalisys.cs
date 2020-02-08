@@ -241,7 +241,7 @@ public class DataAnalisys : MonoBehaviour
         intervals[bins - 1, 1] = max;
         return intervals;
     }
-    public static void hist(float[] data, int bins, GameObject cube, Transform father, GameObject intervalTxt, GradientsTheme.Gradient gradient, byte alpha)
+    public static void hist(float[] data, int bins, GameObject cube, Transform father, GradientsTheme.Gradient gradient, byte alpha)
     {
        
         // Рисует гистограму 3д с привязкой к родителю.
@@ -259,26 +259,26 @@ public class DataAnalisys : MonoBehaviour
                 GameObject obj = Instantiate(cube);
                 obj.transform.SetParent(father);
                 obj.GetComponent<MeshRenderer>().material.color = colors[i];
-                GameObject txtObj = Instantiate(intervalTxt);
+                //GameObject txtObj = Instantiate(intervalTxt);
                 obj.transform.transform.localScale = new Vector3((10.0f / bins), countInInterval(data, intervals[i, 0] - 1f, intervals[i, 1]) * kf, 10.0f / bins);
                 obj.transform.localPosition = new Vector3(-5.0f + (obj.transform.localScale.x / 2.0f) + i * (obj.transform.localScale.x), obj.transform.localScale.y / 2.0f, obj.transform.position.z);
                 obj.transform.localRotation = new Quaternion(0,0,0,0);
                 string text = "" + intervals[i, 0];
-                txtObj.GetComponent<TextMesh>().text = text;
-                txtObj.transform.position = obj.transform.position;
+                //txtObj.GetComponent<TextMesh>().text = text;
+                //txtObj.transform.position = obj.transform.position;
             }
             else if (i == bins - 1)
             {
                 GameObject obj = Instantiate(cube);
                 obj.transform.SetParent(father);
                 obj.GetComponent<MeshRenderer>().material.color = colors[i];
-                GameObject txtObj = Instantiate(intervalTxt);
+                //GameObject txtObj = Instantiate(intervalTxt);
                 obj.transform.transform.localScale = new Vector3((10.0f / bins), countInInterval(data, intervals[i, 0], intervals[i, 1] + 1) * kf, 10.0f / bins);
                 obj.transform.localPosition = new Vector3(-5.0f + (obj.transform.localScale.x / 2.0f) + i * (obj.transform.localScale.x), obj.transform.localScale.y / 2.0f, obj.transform.position.z);
                 obj.transform.localRotation = new Quaternion(0, 0, 0, 0);
                 string text = "" + (intervals[i, 1] - 1);
-                txtObj.GetComponent<TextMesh>().text = text;
-                txtObj.transform.position = obj.transform.position;
+                //txtObj.GetComponent<TextMesh>().text = text;
+                //txtObj.transform.position = obj.transform.position;
             }
             else
             {
