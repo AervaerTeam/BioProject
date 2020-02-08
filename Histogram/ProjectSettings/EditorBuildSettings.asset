@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Graphics/Hist/DiogramAR-demo-takephoto.unity
+    guid: a23b2b98ab0180c4a8c117a7528e6a6c
   m_configObjects: {}

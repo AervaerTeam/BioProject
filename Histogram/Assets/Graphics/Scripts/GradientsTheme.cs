@@ -18,11 +18,11 @@ public class GradientsTheme : MonoBehaviour
         FreshTurboscent, KokoCaramel, VirginAmerica, 
         TurquioiseFlow, PastelOrangeAtTheSun, PurpleBliss, CrazyOrangeI, Friday }
 
-    public GameObject exCube;
+
     // Start is called before the first frame update
     void Start()
     {
-        exCube.transform.GetComponent<Renderer>().material.color = new Color32(61, 114, 180, 1);
+
        
     }
 

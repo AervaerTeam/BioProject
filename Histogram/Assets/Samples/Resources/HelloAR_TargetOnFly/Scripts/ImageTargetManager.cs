@@ -40,6 +40,22 @@ namespace Sample
                 cube.transform.parent = imageTarget.transform;
             }
         }
+        public void LoadNewTarget(GameObject someObj)
+        {
+            var imageTargetName_FileDic = pathManager.GetDirectoryName_FileDic();
+            foreach (var obj in imageTargetName_FileDic.Where(obj => !imageTargetDic.ContainsKey(obj.Key)))
+            {
+                GameObject imageTarget = new GameObject(obj.Key);
+                var behaviour = imageTarget.AddComponent<ImageTargetController>();
+                behaviour.TargetName = obj.Key;
+                behaviour.TargetPath = obj.Value.Replace(@"\", "/");
+                behaviour.Type = PathType.Absolute;
+                behaviour.ImageTracker = Tracker;
+                imageTargetDic.Add(obj.Key, behaviour);
+                var cube = Instantiate(someObj);
+                cube.transform.parent = imageTarget.transform;
+            }
+        }
 
         public void ClearAllTarget()
         {

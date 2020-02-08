@@ -33,18 +33,17 @@ namespace Sample
                     StartCoroutine(ShowMessageAndLoadTarget());
                 StartShowMessage = false;
             }
-
-            GUI.Box(new Rect(Screen.width / 2 - 250, 30, 500, 60), "The box area will be used as ImageTarget. Take photo!", skin.GetStyle("Button"));
+            GUI.Box(new Rect(Screen.width / 2 - 250, 30, 500, 60), "Запомнить метку!", skin.GetStyle("Button"));
             GUI.Box(new Rect(Screen.width / 4, Screen.height / 4, Screen.width / 2, Screen.height / 2), "", skin.GetStyle("Button"));
 
             if (isShowing)
-                GUI.Box(new Rect(Screen.width / 2 - 65, Screen.height / 2, 130, 60), "Photo Saved", skin.GetStyle("Button"));
+                GUI.Box(new Rect(Screen.width / 2 - 65, Screen.height / 2, 130, 60), "Фото сохранено!", skin.GetStyle("Button"));
 
 
-            if (GUI.Button(new Rect(Screen.width / 2 - 80, Screen.height - 85, 160, 80), "Take Photo", skin.GetStyle("Button")))
+            if (GUI.Button(new Rect(Screen.width / 2 - 80, Screen.height - 85, 160, 80), "Сделать фото", skin.GetStyle("Button")))
                 imageCreator.StartTakePhoto();
 
-            if (GUI.Button(new Rect(Screen.width - 160, Screen.height - 85, 150, 80), "Clear Targets", skin.GetStyle("Button")))
+            if (GUI.Button(new Rect(Screen.width - 160, Screen.height - 85, 150, 80), "Удалить таргеты", skin.GetStyle("Button")))
             {
                 imageCreator.ClearTexture();
                 imageManager.ClearAllTarget();
